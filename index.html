@@ -310,7 +310,7 @@
 // ═══════════════════════════════════════════════════════════════
 //  CONFIG
 // ═══════════════════════════════════════════════════════════════
-const CONFIG = {"LP0_c":-1.1923849133158215,"lp_per_point":0.005852048465053101,"max_total_c":348.1048055709818,"features":[{"label":"Ki67 (%)","type":"num","pts_abs":65.63669276169924,"is_rev":false,"fmin":0.06,"fmax":0.95,"orig_col":"Ki67"},{"label":"Возраст","type":"num","pts_abs":47.5180900882527,"is_rev":true,"fmin":31.0,"fmax":82.0,"orig_col":"Возраст"},{"label":"РП","type":"num","pts_abs":57.68386208966485,"is_rev":true,"fmin":0.0,"fmax":8.0,"orig_col":"РП"},{"label":"РЭ","type":"num","pts_abs":50.74853521659382,"is_rev":true,"fmin":0.0,"fmax":8.0,"orig_col":"РЭ"},{"label":"HER2 экспрессия (%)","type":"num","pts_abs":100.0,"is_rev":false,"fmin":16.041604160416043,"fmax":100.0,"orig_col":"HER2_pct"},{"label":"р53 статус","type":"ohe_group","pts_abs":9.618598705507397,"is_rev":false,"shifts_pts":[0.0,1.082118859575117,9.618598705507397],"levels":["wild-type","null-type","overexpression"]},{"label":"N+","type":"ord","pts_abs":2.4605460270222803,"is_rev":true,"fmin":0.0,"fmax":1.0,"categories":["0","1"]},{"label":"T","type":"ord","pts_abs":2.082460107103528,"is_rev":true,"fmin":0.0,"fmax":2.0,"categories":["1","2","3"]},{"label":"G","type":"bin","pts_abs":6.948259944931774,"is_rev":false,"fmin":0.0,"fmax":1.0,"labels_map":{"0":"2","1":"3"}},{"label":"HER2 амплификация","type":"bin","pts_abs":5.407760630206209,"is_rev":true,"fmin":0.0,"fmax":1.0,"labels_map":{"0":"3","1":"2"}}]};
+const CONFIG = {"LP0_c":-1.1923849133158215,"lp_per_point":0.005852048465053101,"max_total_c":348.1048055709818,"features":[{"label":"Ki67 (%)","type":"num","pts_abs":65.63669276169924,"is_rev":false,"fmin":0.06,"fmax":0.95,"orig_col":"Ki67"},{"label":"Возраст","type":"num","pts_abs":47.5180900882527,"is_rev":true,"fmin":31.0,"fmax":82.0,"orig_col":"Возраст"},{"label":"РП","type":"num","pts_abs":57.68386208966485,"is_rev":true,"fmin":0.0,"fmax":8.0,"orig_col":"РП"},{"label":"РЭ","type":"num","pts_abs":50.74853521659382,"is_rev":true,"fmin":0.0,"fmax":8.0,"orig_col":"РЭ"},{"label":"HER2 экспрессия (%)","type":"num","pts_abs":100.0,"is_rev":false,"fmin":16.041604160416043,"fmax":100.0,"orig_col":"HER2_pct"},{"label":"р53 статус","type":"ohe_group","pts_abs":9.618598705507397,"is_rev":false,"shifts_pts":[0.0,1.082118859575117,9.618598705507397],"levels":["wild","null","overexpression"]},{"label":"N+","type":"ord","pts_abs":2.4605460270222803,"is_rev":true,"fmin":0.0,"fmax":1.0,"categories":["0","1"]},{"label":"T","type":"ord","pts_abs":2.082460107103528,"is_rev":true,"fmin":0.0,"fmax":2.0,"categories":["1","2","3"]},{"label":"G","type":"bin","pts_abs":6.948259944931774,"is_rev":false,"fmin":0.0,"fmax":1.0,"labels_map":{"0":"2","1":"3"}},{"label":"HER2 амплификация","type":"bin","pts_abs":5.407760630206209,"is_rev":true,"fmin":0.0,"fmax":1.0,"labels_map":{"0":"3","1":"2"}}]};
 // ═══════════════════════════════════════════════════════════════
 
 // Ki67 хранится как доля (0–1), показываем в % (0–100)
@@ -382,7 +382,7 @@ function buildUI() {
     else /* num */                       defVal = Math.round((feat.fmin + feat.fmax) / 2);
     S.push({ on: true, val: defVal });
 
-    const isUp   = feat.is_rev;
+    const isUp   = !feat.is_rev;   // is_rev=false → pts_range>0 → beta>0 → ↑P
     const dirTxt = isUp ? '↑ P(pCR)' : '↓ P(pCR)';
     const bClass = isUp ? 'badge-up' : 'badge-dn';
 
